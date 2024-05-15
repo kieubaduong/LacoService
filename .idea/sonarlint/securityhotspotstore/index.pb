@@ -3,3 +3,5 @@
 build.gradle.kts,d\b\dbcff70658daf80b53ce624f6adcaa529df5ed8d
 S
 #src/main/java/org/example/Main.java,0\b\0ba1b9c7a4878802f938e331cc2d8a042087ec6b
+`
+0src/main/java/org/example/MouseClickHandler.java,4\1\41a8213514e13c9a2aa1ad5b24089a3e28931c70
