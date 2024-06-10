@@ -17,6 +17,11 @@ import static org.example.Main.LOGGER;
 
 public class MouseDoubleClickHandler extends AbstractHandler {
     private static final Gson GSON = new Gson();
+    private final Robot robot;
+
+    public MouseDoubleClickHandler(Robot robot) {
+        this.robot = robot;
+    }
 
     @Override
     public void handle(String target, Request baseRequest, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -34,14 +39,13 @@ public class MouseDoubleClickHandler extends AbstractHandler {
         int y = (int) (screenSize.height * scaleY);
 
         try {
-            Robot robot = new Robot();
             robot.mouseMove(x, y);
             robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
             robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
             Thread.sleep(100);
             robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
             robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
-        } catch (AWTException | InterruptedException e) {
+        } catch (InterruptedException e) {
             LOGGER.log(Level.SEVERE, "Error performing mouse double click", e);
             throw new ServletException("Error performing mouse double click", e);
         }

@@ -67,7 +67,7 @@ public class Main {
         socket.getOutputStream().flush();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws AWTException {
         Server server = new Server(8080);
 
         ServletContextHandler contextHandler = new ServletContextHandler(ServletContextHandler.SESSIONS);

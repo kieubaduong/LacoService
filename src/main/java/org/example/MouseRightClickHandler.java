@@ -17,6 +17,11 @@ import static org.example.Main.LOGGER;
 
 public class MouseRightClickHandler extends AbstractHandler {
     private static final Gson GSON = new Gson();
+    private final Robot robot;
+
+    public MouseRightClickHandler(Robot robot) {
+        this.robot = robot;
+    }
 
     @Override
     public void handle(String target, Request baseRequest, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -33,15 +38,9 @@ public class MouseRightClickHandler extends AbstractHandler {
         int x = (int) (screenSize.width * scaleX);
         int y = (int) (screenSize.height * scaleY);
 
-        try {
-            Robot robot = new Robot();
-            robot.mouseMove(x, y);
-            robot.mousePress(InputEvent.BUTTON3_DOWN_MASK);
-            robot.mouseRelease(InputEvent.BUTTON3_DOWN_MASK);
-        } catch (AWTException e) {
-            LOGGER.log(Level.SEVERE, "Error performing mouse right click", e);
-            throw new ServletException("Error performing mouse right click", e);
-        }
+        robot.mouseMove(x, y);
+        robot.mousePress(InputEvent.BUTTON3_DOWN_MASK);
+        robot.mouseRelease(InputEvent.BUTTON3_DOWN_MASK);
 
         response.setContentType("text/html;charset=utf-8");
         response.setStatus(HttpServletResponse.SC_OK);

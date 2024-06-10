@@ -1,3 +1,11 @@
 
-¦
-java:S2142,"^Either re-interrupt this method or rethrow the "InterruptedException" that can be caught here.(ÿ·¦Éıÿÿÿÿ8´Ô’»ı1J$5920b143-00ce-4213-812d-236d5534a253
+g
+java:S2629"$Invoke method(s) only conditionally.(šê†8§ “›€2J$69f99973-5914-4b27-9488-6aff2aec615e
+l
+java:S2629$"$Invoke method(s) only conditionally.(‹ ï¢ÿÿÿÿÿ8¨ “›€2J$e090554a-bfcf-49ea-8d91-3f391fba92b5
+l
+java:S26299"$Invoke method(s) only conditionally.(”æÀ˜ûÿÿÿÿ8¨ “›€2J$e2aeb7b4-dacc-4e93-bc7a-c7e2d44597a6
+¡
+java:S21420"^Either re-interrupt this method or rethrow the "InterruptedException" that can be caught here.(ä ¹€8´Ô’»ı1J$39ecad42-ede5-4f78-9c7f-466f2de8dc82
+›
+java:S21390"XEither log this exception and handle it, or rethrow it with some contextual information.(ä ¹€8„¡“›€2J$385d9a91-9d4c-4e09-bc15-679cf1b8e277

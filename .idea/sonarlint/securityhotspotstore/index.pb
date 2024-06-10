@@ -15,3 +15,5 @@ e
 5src/main/java/org/example/MouseRightClickHandler.java,7\7\77f5cb7f0c54d598677ef520f12bfa84440a5f49
 _
 /src/main/java/org/example/MouseDragHandler.java,4\0\4048f3e0c9b96ae305838613179f3f01784fa86d
+a
+1src/main/java/org/example/MouseScrollHandler.java,d\1\d1fa1cf344761c845a731d2067e34b802ee88fa2

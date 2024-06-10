@@ -17,6 +17,11 @@ import static org.example.Main.LOGGER;
 
 public class MouseDragHandler extends AbstractHandler {
     private static final Gson GSON = new Gson();
+    private final Robot robot;
+
+    public MouseDragHandler(Robot robot) {
+        this.robot = robot;
+    }
 
     @Override
     public void handle(String target, Request baseRequest, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -37,16 +42,10 @@ public class MouseDragHandler extends AbstractHandler {
         int x2 = (int) (screenSize.width * endX);
         int y2 = (int) (screenSize.height * endY);
 
-        try {
-            Robot robot = new Robot();
-            robot.mouseMove(x1, y1);
-            robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
-            robot.mouseMove(x2, y2);
-            robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
-        } catch (AWTException e) {
-            LOGGER.log(Level.SEVERE, "Error performing mouse drag", e);
-            throw new ServletException("Error performing mouse drag", e);
-        }
+        robot.mouseMove(x1, y1);
+        robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
+        robot.mouseMove(x2, y2);
+        robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
 
         response.setContentType("text/html;charset=utf-8");
         response.setStatus(HttpServletResponse.SC_OK);
