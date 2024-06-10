@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 import static org.example.Main.LOGGER;
 
-public class MouseClickHandler extends AbstractHandler {
+public class MouseRightClickHandler extends AbstractHandler {
     private static final Gson GSON = new Gson();
 
     @Override
@@ -36,18 +36,18 @@ public class MouseClickHandler extends AbstractHandler {
         try {
             Robot robot = new Robot();
             robot.mouseMove(x, y);
-            robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
-            robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+            robot.mousePress(InputEvent.BUTTON3_DOWN_MASK);
+            robot.mouseRelease(InputEvent.BUTTON3_DOWN_MASK);
         } catch (AWTException e) {
-            LOGGER.log(Level.SEVERE, "Error performing mouse click", e);
-            throw new ServletException("Error performing mouse click", e);
+            LOGGER.log(Level.SEVERE, "Error performing mouse right click", e);
+            throw new ServletException("Error performing mouse right click", e);
         }
 
         response.setContentType("text/html;charset=utf-8");
         response.setStatus(HttpServletResponse.SC_OK);
-        response.getWriter().println("<h1>Mouse click performed at: " + x + ", " + y + "</h1>");
+        response.getWriter().println("<h1>Mouse right click performed at: " + x + ", " + y + "</h1>");
 
-        LOGGER.log(Level.INFO, "Mouse click performed at: %d, %d".formatted(x, y));
+        LOGGER.log(Level.INFO, "Mouse right click performed at: %d, %d".formatted(x, y));
     }
 
     private static class Scale {

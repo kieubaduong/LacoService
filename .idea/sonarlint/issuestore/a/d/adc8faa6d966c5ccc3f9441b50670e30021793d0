@@ -1,0 +1,10 @@
+
+g	java:S112 "FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8øõ¿ı1
+j
+java:S1989"MHandle the following exception that could be thrown by "handle": IOException.(­Ú§„8—øõ¿ı1
+j
+java:S1989"MHandle the following exception that could be thrown by "handle": IOException.(´¥´ù8—øõ¿ı1
+o
+java:S1989"MHandle the following exception that could be thrown by "handle": IOException.(ôÉÔÄûÿÿÿÿ8˜øõ¿ı1
+c
+java:S1989 "AHandle the "RuntimeException" thrown here in a "try/catch" block.(Ò‚Òéüÿÿÿÿ8™øõ¿ı1

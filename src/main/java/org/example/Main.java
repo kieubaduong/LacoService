@@ -1,6 +1,8 @@
 package org.example;
 
 import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.servlet.ServletContextHandler;
+import org.eclipse.jetty.servlet.ServletHolder;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -16,29 +18,18 @@ import java.util.logging.Logger;
 public class Main {
     static final Logger LOGGER = Logger.getLogger(Main.class.getName());
     private static boolean running = true;
-    private static final boolean SHOULD_LOG_SIZE = true;
 
     private static final String END_SIGNAL = "END";
 
     private static void sendScreenShot(Socket socket) throws AWTException, IOException {
         while (running) {
-//            LOGGER.info("Sending screenshot...");
-            String encodedString = captureScreenShot();
-            double sizeInBytes = (double) (encodedString.length() * 3) / 4; // Base64 string size in bytes
-            double sizeInKB = sizeInBytes / 1024;
-            if (SHOULD_LOG_SIZE) {
-//                LOGGER.info(String.format("Screenshot size: %.2f KB", sizeInKB));
-            }
-
-            sendEncodedString(socket, encodedString);
-//            LOGGER.info("Screenshot sent");
+            sendEncodedString(socket, captureScreenShot());
         }
     }
 
     private static String captureScreenShot() throws AWTException, IOException {
         Robot robot = new Robot();
         Rectangle screenRect = new Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
-//        LOGGER.info("Screen size: " + screenRect.width + "x" + screenRect.height);
 
         BufferedImage capture = robot.createScreenCapture(screenRect);
 
@@ -78,29 +69,34 @@ public class Main {
 
     public static void main(String[] args) {
         Server server = new Server(8080);
-        server.setHandler(new MouseClickHandler());
+
+        ServletContextHandler contextHandler = new ServletContextHandler(ServletContextHandler.SESSIONS);
+        contextHandler.setContextPath("/");
+        server.setHandler(contextHandler);
+
+        contextHandler.addServlet(new ServletHolder(new MouseClickServletDelegate()), "/*");
 
         try {
             server.start();
         } catch (Exception e) {
-            LOGGER.log(Level.SEVERE, "Exception caught", e);
+            LOGGER.log(Level.SEVERE, Message.EXCEPTION_CAUGHT, e);
         }
 
         try (ServerSocket serverSocket = new ServerSocket(5657)) {
             while (running) {
-                LOGGER.info("Waiting for connection...");
+                LOGGER.info(Message.WAITING_FOR_CONNECTION);
                 Socket socket = serverSocket.accept();
                 sendScreenShot(socket);
             }
         } catch (IOException | AWTException e) {
-            LOGGER.log(Level.SEVERE, "Exception caught", e);
+            LOGGER.log(Level.SEVERE, Message.EXCEPTION_CAUGHT, e);
             running = false;
         }
 
         try {
             server.join();
         } catch (InterruptedException e) {
-            LOGGER.log(Level.SEVERE, "Exception caught", e);
+            LOGGER.log(Level.SEVERE, Message.EXCEPTION_CAUGHT, e);
             Thread.currentThread().interrupt();
         }
     }
